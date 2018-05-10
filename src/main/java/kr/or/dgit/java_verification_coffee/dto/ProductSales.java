@@ -2,32 +2,31 @@ package kr.or.dgit.java_verification_coffee.dto;
 
 public class ProductSales {
 	private Product product;
-	private int unitCost;
-	private int quantity;
-	private int perMargin;
+	private int price;
+	private int saleCnt;
+	private int marginRate;
 	private int rank;
 	private int suprice;
 	private int tax;
 	private int sellprice;
 	private int marginPrice;
-	
+
 	public ProductSales() {
 	}
 
-	public ProductSales(Product product, int unitCost, int quantity, int perMargin) {
+	public ProductSales(Product product, int price, int saleCnt, int marginRate) {
 		this.product = product;
-		this.unitCost = unitCost;
-		this.quantity = quantity;
-		this.perMargin = perMargin;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
 	}
 
-	public ProductSales(Product product, int unitCost, int quantity, int perMargin, int rank, int suprice, int tax,
+	public ProductSales(Product product, int price, int saleCnt, int marginRate, int rank, int suprice, int tax,
 			int sellprice, int marginPrice) {
-		super();
 		this.product = product;
-		this.unitCost = unitCost;
-		this.quantity = quantity;
-		this.perMargin = perMargin;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
 		this.rank = rank;
 		this.suprice = suprice;
 		this.tax = tax;
@@ -43,28 +42,28 @@ public class ProductSales {
 		this.product = product;
 	}
 
-	public int getUnitCost() {
-		return unitCost;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setUnitCost(int unitCost) {
-		this.unitCost = unitCost;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getSaleCnt() {
+		return saleCnt;
 	}
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setSaleCnt(int saleCnt) {
+		this.saleCnt = saleCnt;
 	}
 
-	public int getPerMargin() {
-		return perMargin;
+	public int getMarginRate() {
+		return marginRate;
 	}
 
-	public void setPerMargin(int perMargin) {
-		this.perMargin = perMargin;
+	public void setMarginRate(int marginRate) {
+		this.marginRate = marginRate;
 	}
 
 	public int getRank() {
@@ -110,20 +109,14 @@ public class ProductSales {
 	@Override
 	public String toString() {
 		return String.format(
-				"ProductSales [product=%s, unitCost=%s, quantity=%s, perMargin=%s, rank=%s, suprice=%s, tax=%s, sellprice=%s, marginPrice=%s]",
-				product, unitCost, quantity, perMargin, rank, suprice, tax, sellprice, marginPrice);
+				"ProductSales [product=%s, price=%s, saleCnt=%s, marginRate=%s, rank=%s, suprice=%s, tax=%s, sellprice=%s, marginPrice=%s]",
+				product, price, saleCnt, marginRate, rank, suprice, tax, sellprice, marginPrice);
 	}
 
 	public Object[] toArray() {
-		return new Object[] { rank, product.getCode(), product.getPrdName(),
-				String.format("%,d", unitCost), 
-				String.format("%,d", quantity),
-				String.format("%,d", suprice),
-				String.format("%,d", tax),
-				String.format("%,d", sellprice),
-				perMargin,
-				String.format("%,d", marginPrice)
-		};
+		return new Object[] { rank, product.getCode(), product.getName(), String.format("%,d", price),
+				String.format("%,d", saleCnt), String.format("%,d", suprice), String.format("%,d", tax),
+				String.format("%,d", sellprice), marginRate, String.format("%,d", marginPrice) };
 	}
 
 }

@@ -2,18 +2,14 @@ package kr.or.dgit.java_verification_coffee.dto;
 
 public class Product {
 	private String code;
-	private String prdName;
-	
+	private String name;
+
 	public Product() {
 	}
 
-	public Product(String code) {
+	public Product(String code, String name) {
 		this.code = code;
-	}
-	
-	public Product(String code, String prdName) {
-		this.code = code;
-		this.prdName = prdName;
+		this.name = name;
 	}
 
 	public String getCode() {
@@ -24,17 +20,17 @@ public class Product {
 		this.code = code;
 	}
 
-	public String getPrdName() {
-		return prdName;
+	public String getName() {
+		return name;
 	}
 
-	public void setPrdName(String prdName) {
-		this.prdName = prdName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Product [code=%s, prdName=%s]", code, prdName);
+		return String.format("Product [code=%s, name=%s]", code, name);
 	}
-	
+
 }

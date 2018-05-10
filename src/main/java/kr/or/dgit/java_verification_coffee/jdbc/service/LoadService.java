@@ -26,7 +26,7 @@ public class LoadService implements DaoService {
 		for (String tblName : tables) {
 			String path = String.format("%s\\DataFiles\\%s.txt", System.getProperty("user.dir"), tblName);
 			String sql = String.format(
-					"load data local infile '%s' into table %s character set 'euckr' fields terminated by ',';", path,
+					"load data local infile '%s' into table %s character set 'utf8' fields terminated by ',';", path,
 					tblName);
 			sql = sql.replace("\\", "/");
 			ExecuteSql.getInstance().execSQL(sql);

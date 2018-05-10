@@ -60,7 +60,7 @@ public class BackUpService implements DaoService {
 		String resPath = System.getProperty("user.dir") + "\\BackupFiles\\" + tblName + ".txt";
 		resPath = resPath.replace("\\", "/");
 
-		try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(resPath), "euc-kr");) {
+		try (OutputStreamWriter osw = new OutputStreamWriter(new FileOutputStream(resPath), "utf8");) {
 			osw.write(result);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
