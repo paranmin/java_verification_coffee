@@ -13,7 +13,7 @@ import kr.or.dgit.java_verification_coffee.service.ProductSalesService;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ProductSalesServiceTest {
 
-	@Test
+	
 	public void test1InsertProductSale() {
 		Product product = new Product();
 		product.setCode("A001");

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import kr.or.dgit.java_verification_coffee.jdbc.DBConn;
 import kr.or.dgit.java_verification_coffee.jdbc.dao.ExecuteSql;
 
 public class InitService implements DaoService {
@@ -20,6 +21,36 @@ public class InitService implements DaoService {
 
 	@Override
 	public void service() {
+		createDBTable();
+		createTriggerOrProcedure();
+	}
+
+	private void createTriggerOrProcedure() {
+		File f = new File(System.getProperty("user.dir") + "\\resources\\create_trigger_procedure.txt");
+		String dbName = (String) DBConn.getInstance().getProperties().get("dbname");
+		ExecuteSql.getInstance().execSQL("use " + dbName);
+		if (!f.exists()) {
+			return;
+		}
+		try (BufferedReader br = new BufferedReader(new FileReader(f));) {
+			StringBuilder statement = new StringBuilder();
+			for (String line; (line = br.readLine()) != null;) {
+				if (!line.isEmpty() && !line.startsWith("--")) {
+					statement.append(line);
+				}
+				if (line.endsWith("END;")) {
+					ExecuteSql.getInstance().execSQL(statement.toString());
+					statement.setLength(0);
+				}
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void createDBTable() {
 		File f = new File(System.getProperty("user.dir") + "\\resources\\create_sql.txt");
 		try (BufferedReader br = new BufferedReader(new FileReader(f));) {
 			StringBuilder sb = new StringBuilder();
@@ -29,7 +60,7 @@ public class InitService implements DaoService {
 					sb.append(line + "\r\n");
 				}
 				if (line.endsWith(";")) {
-					// System.out.println(sb);
+					//System.out.println(sb);
 					ExecuteSql.getInstance().execSQL(sb.toString());
 					sb.setLength(0);
 				}
@@ -40,5 +71,4 @@ public class InitService implements DaoService {
 			e1.printStackTrace();
 		}
 	}
-
 }

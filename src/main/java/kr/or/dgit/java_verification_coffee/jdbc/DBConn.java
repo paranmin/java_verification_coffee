@@ -10,24 +10,30 @@ public class DBConn {
 
 	private Connection connection;
 
+	private Properties properties;
+
 	public static DBConn getInstance() {
 		return instance;
 	}
 
 	private DBConn() {
 		try {
-			Properties info = LoadProperties.getInstance().getProperties();
-			connection = DriverManager.getConnection(info.getProperty("url"), info);
+			properties = LoadProperties.getInstance().getProperties();
+			connection = DriverManager.getConnection(properties.getProperty("url"), properties);
 		} catch (SQLException e) {
 			System.err.printf("%s = %s%n", e.getMessage(), e.getErrorCode());
 			e.printStackTrace();
 		}
 	}
-	
+
 	public Connection getConnection() {
 		return connection;
 	}
-	
+
+	public Properties getProperties() {
+		return properties;
+	}
+
 	public void connectionClose() {
 		try {
 			connection.close();
@@ -35,4 +41,5 @@ public class DBConn {
 			e.printStackTrace();
 		}
 	}
+
 }
