@@ -104,11 +104,11 @@ public class ProductSaleUI extends JFrame implements ActionListener {
 		btnInput = new JButton("입력");
 		pBtn.add(btnInput);
 
-		btnOuput1 = new JButton("출력[판매순위]");
+		btnOuput1 = new JButton("출력1[판매순위]");
 		btnOuput1.addActionListener(this);
 		pBtn.add(btnOuput1);
 
-		btnOutput2 = new JButton("출력[마진순위]");
+		btnOutput2 = new JButton("출력2[마진순위]");
 		btnOutput2.addActionListener(this);
 		pBtn.add(btnOutput2);
 	}

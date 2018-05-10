@@ -19,6 +19,7 @@ public class DBSettingUI extends JFrame {
 	}
 
 	private void initComponents() {
+		setTitle("DB 관리메뉴");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 130);
 		contentPane = new JPanel();
