@@ -4,11 +4,14 @@ import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import kr.or.dgit.java_verification_coffee.component.AbstractBtnAction;
-
+import kr.or.dgit.java_verification_coffee.jdbc.service.BackUpService;
+import kr.or.dgit.java_verification_coffee.jdbc.service.InitService;
+import kr.or.dgit.java_verification_coffee.jdbc.service.LoadService;
 
 @SuppressWarnings("serial")
 public class DBSettingUI extends JFrame {
@@ -20,7 +23,7 @@ public class DBSettingUI extends JFrame {
 
 	private void initComponents() {
 		setTitle("DB 관리메뉴");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 130);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -36,20 +39,20 @@ public class DBSettingUI extends JFrame {
 		JButton btnDataLoad = new JButton(new AbstractBtnAction("복원", this));
 		contentPane.add(btnDataLoad);
 	}
-	
-	/*public void initial() {
+
+	public void initial() {
 		InitService.getInstance().service();
 		JOptionPane.showMessageDialog(null, "초기화 완료");
 	}
-	
+
 	public void backUpData() {
 		BackUpService.getInstance().service();
 		JOptionPane.showMessageDialog(null, "백업");
 	}
-	
+
 	public void loadData() {
 		LoadService.getInstance().service();
 		JOptionPane.showMessageDialog(null, "복원");
-	}*/
+	}
 
 }

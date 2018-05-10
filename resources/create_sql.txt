@@ -1,0 +1,24 @@
+-- coffee
+DROP SCHEMA IF EXISTS coffee_project;
+
+-- coffee
+CREATE SCHEMA coffee_project;
+
+use coffee_project;
+
+CREATE TABLE product (
+  code char(4) NOT NULL COMMENT 'code',
+  name varchar(20) DEFAULT NULL COMMENT 'name',
+  PRIMARY KEY (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='제품';
+
+CREATE TABLE sale (
+  `no` int(11) NOT NULL COMMENT 'no',
+  code char(4) NOT NULL COMMENT 'code',
+  price int(11) NOT NULL COMMENT 'price',
+  saleCnt int(11) NOT NULL COMMENT 'saleCnt',
+  marginRate int(11) NOT NULL COMMENT 'marginRate',
+  PRIMARY KEY (`no`),
+  KEY `FK_product_TO_sale` (`code`),
+  CONSTRAINT `FK_product_TO_sale` FOREIGN KEY (`code`) REFERENCES `product` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='판매현황';

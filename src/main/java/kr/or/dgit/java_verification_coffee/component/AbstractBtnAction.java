@@ -19,13 +19,13 @@ public class AbstractBtnAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		switch (e.getActionCommand()) {
 		case "초기화":
-			//settingMain.initial();
+			settingMain.initial();
 			break;
 		case "백업":
-			//settingMain.backUpData();
+			settingMain.backUpData();
 			break;
 		case "복원":
-			//settingMain.loadData();
+			settingMain.loadData();
 			break;
 		}
 	}

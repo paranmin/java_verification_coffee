@@ -19,7 +19,8 @@ repositories {
 dependencies {
 	// https://mvnrepository.com
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
-	compile group: 'log4j', name: 'log4j', version: '1.2.17'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.10.0'
+	compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.10.0'
 	compile group: 'org.mybatis', name: 'mybatis', version: '3.4.5'
 
 	testImplementation 'junit:junit:4.12'
