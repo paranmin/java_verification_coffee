@@ -1,4 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.or.dgit.java_verification_coffee.dao.ProductSalesDao">
+	<insert id="insertProductSale" parameterType="ProductSales">
+		insert into sale(code, price, saleCnt, marginRate)
+		values (#{product.code}, #{price}, #{saleCnt}, #{marginRate})
+	</insert>
+
+	<update id="updateProductSale" parameterType="ProductSales">
+		update sale
+		<set>
+			<if test="code != null and code != ''">
+				code = #{code},
+			</if>
+			<if test="price != null and price > 0">
+				price = #{price},
+			</if>
+			<if test="saleCnt != null and saleCnt > 0">
+				saleCnt = #{saleCnt},
+			</if>
+			<if test="marginRate != null and marginRate > 0">
+				marginRate = #{marginRate}
+			</if>
+		</set>
+		where no = #{no}
+	</update>
+
+	<delete id="deleteProductSale" parameterType="ProductSales">
+		delete from sale where no = #{no}
+	</delete>
+
+	<sql id="selectSql">
+		select no, code, price, saleCnt, marginRate from sale
+	</sql>
+
+	<select id="selectProductSalesByAll" resultType="ProductSales">
+		<include refid="selectSql" />
+	</select>
+
+	<select id="selectProductSalesByCode" parameterType="String" resultType="ProductSales">
+		<include refid="selectSql" />
+		where code = #{code}
+	</select>
 </mapper>
