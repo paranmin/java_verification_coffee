@@ -2,9 +2,11 @@ package kr.or.dgit.java_verification_coffee.jdbc.service;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import kr.or.dgit.java_verification_coffee.jdbc.DBConn;
 import kr.or.dgit.java_verification_coffee.jdbc.dao.ExecuteSql;
@@ -52,7 +54,7 @@ public class InitService implements DaoService {
 
 	private void createDBTable() {
 		File f = new File(System.getProperty("user.dir") + "\\resources\\create_sql.txt");
-		try (BufferedReader br = new BufferedReader(new FileReader(f));) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f), "utf-8"));) {
 			StringBuilder sb = new StringBuilder();
 			String line = null;
 			while ((line = br.readLine()) != null) {
