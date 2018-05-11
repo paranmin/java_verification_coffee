@@ -18,6 +18,8 @@ public class Client extends JFrame implements ActionListener {
 	private JPanel contentPane;
 	private JButton btnDBSetting;
 	private JButton btnCoffeeUI;
+	private DBSettingUI dbUI;
+	private ProductSaleUI productUI;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -63,12 +65,16 @@ public class Client extends JFrame implements ActionListener {
 	}
 
 	protected void actionPerformedBtnDBSetting(ActionEvent e) {
-		DBSettingUI frame = new DBSettingUI();
-		frame.setVisible(true);
+		if (dbUI == null) {
+			dbUI = new DBSettingUI();
+		}
+		dbUI.setVisible(true);
 	}
 
 	protected void actionPerformedBtnCoffeeUI(ActionEvent e) {
-		ProductSaleUI frame = new ProductSaleUI();
-		frame.setVisible(true);
+		if (productUI == null) {
+			productUI = new ProductSaleUI();
+		}
+		productUI.setVisible(true);
 	}
 }
