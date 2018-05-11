@@ -1,6 +1,7 @@
 package kr.or.dgit.java_verification_coffee.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
@@ -20,7 +21,7 @@ public class ProductSalesService {
 
 	private ProductSalesService() {
 	}
-	
+
 	public int insertProductSale(ProductSales sale) {
 		log.debug("insertProductSale");
 		int res = 0;
@@ -58,10 +59,31 @@ public class ProductSalesService {
 		}
 	}
 
+	public List<ProductSales> selectProductSalesBySell() {
+		log.debug("selectProductSalesBySell");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectProductSalesBySell");
+		}
+	}
+
+	public List<ProductSales> selectProductSalesByMargin() {
+		log.debug("selectProductSalesByMargin");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "selectProductSalesByMargin");
+		}
+	}
+
 	public ProductSales selectProductSalesByCode(String code) {
 		log.debug("selectProductSalesByCode");
 		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
 			return sqlSession.selectOne(namespace + "selectProductSalesByCode", code);
+		}
+	}
+
+	public List<Map<String, Object>> getTotal() {
+		log.debug("getTotal");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectList(namespace + "getTotal");
 		}
 	}
 }

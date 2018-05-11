@@ -34,4 +34,31 @@ public class ProductService {
 			return sqlSession.selectOne(namespace + "selectProductByCode", code);
 		}
 	}
+	
+	public int insertProduct(Product product) {
+		log.debug("insertProduct");
+		int res = 0;
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.insert(namespace + "insertProduct", product);
+			sqlSession.commit();
+		}
+		return res;
+	}
+
+	public Product dupdateProduct(Product product) {
+		log.debug("dupdateProduct");
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			return sqlSession.selectOne(namespace + "dupdateProduct", product);
+		}
+	}
+
+	public int deleteProduct(Product product) {
+		log.debug("deleteProduct");
+		int res = 0;
+		try (SqlSession sqlSession = MyBatisSqlSessionFactory.openSession();) {
+			res = sqlSession.delete(namespace + "deleteProduct", product);
+			sqlSession.commit();
+		}
+		return res;
+	}
 }

@@ -8,7 +8,7 @@ BEGIN
 		) as rank
 		
 	from (
-		select p.code, p.prdname, s.price, s.saleCnt, s.marginRate, 
+		select p.code, p.name, s.price, s.saleCnt, s.marginRate, 
 			(@sell := (s.price*s.saleCnt)) as sellprice, 
 			(@tax := ceil(@sell / 11)) as tax,
 			(@sup := @sell - @tax) as suprice,
@@ -28,7 +28,7 @@ BEGIN
 			least(0, @point:=if(@score = marprice, @point+1, 1), @score := marprice)
 		) as rank
 	from (
-		select p.code, p.prdname, s.price, s.saleCnt, s.marginRate, 
+		select p.code, p.name, s.price, s.saleCnt, s.marginRate, 
 			(@sell := (s.price*s.saleCnt)) as sellprice, 
 			(@tax := ceil(@sell / 11)) as tax,
 			(@sup := @sell - @tax) as suprice,
@@ -37,4 +37,14 @@ BEGIN
 		join product p on s.code = p.code
 	) temp
 	order by marprice desc;
+END;
+
+CREATE PROCEDURE coffee_project.proc_sale_total()
+begin
+	select  SUM(@sell := (s.price*s.saleCnt)) as sellprice, 
+			SUM(@tax := ceil(@sell / 11)) as tax,
+			SUM(@sup := @sell - @tax) as suprice,
+			SUM(@marp := round(@sup * (s.marginRate/100))) as marprice
+	from sale s
+	join product p on s.code = p.code;
 END;

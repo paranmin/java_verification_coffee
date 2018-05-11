@@ -43,7 +43,7 @@ public class ProductSaleRankUI extends JFrame {
 		pTable = new TableContent();
 		contentPane.add(pTable, BorderLayout.CENTER);
 	}
-	
+
 	public void setListData(List<ProductSales> list) {
 		pTable.loadTableDatas(list);
 	}

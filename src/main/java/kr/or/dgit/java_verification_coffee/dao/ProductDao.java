@@ -8,4 +8,10 @@ public interface ProductDao {
 	List<Product> selectProductByAll();
 
 	Product selectProductByCode(String code);
+
+	int insertProduct(Product product);
+
+	Product dupdateProduct(Product product);
+
+	int deleteProduct(Product product);
 }

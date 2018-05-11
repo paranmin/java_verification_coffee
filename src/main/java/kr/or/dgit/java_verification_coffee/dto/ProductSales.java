@@ -2,6 +2,7 @@ package kr.or.dgit.java_verification_coffee.dto;
 
 public class ProductSales {
 	private Product product;
+	private int no;
 	private int price;
 	private int saleCnt;
 	private int marginRate;
@@ -16,6 +17,14 @@ public class ProductSales {
 
 	public ProductSales(Product product, int price, int saleCnt, int marginRate) {
 		this.product = product;
+		this.price = price;
+		this.saleCnt = saleCnt;
+		this.marginRate = marginRate;
+	}
+
+	public ProductSales(Product product, int no, int price, int saleCnt, int marginRate) {
+		this.product = product;
+		this.no = no;
 		this.price = price;
 		this.saleCnt = saleCnt;
 		this.marginRate = marginRate;
@@ -40,6 +49,14 @@ public class ProductSales {
 
 	public void setProduct(Product product) {
 		this.product = product;
+	}
+
+	public int getNo() {
+		return no;
+	}
+
+	public void setNo(int no) {
+		this.no = no;
 	}
 
 	public int getPrice() {

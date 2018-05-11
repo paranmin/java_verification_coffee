@@ -1,10 +1,13 @@
 package kr.or.dgit.java_verification_coffee.component;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.SwingConstants;
 
 import kr.or.dgit.java_verification_coffee.dto.ProductSales;
+import kr.or.dgit.java_verification_coffee.service.ProductSalesService;
 
 
 @SuppressWarnings("serial")
@@ -21,28 +24,28 @@ public class TableContent extends AbtractTableContent<ProductSales> {
 	}
 
 	public Object[][] getRows(List<ProductSales> list) {
-		int supTotal = 0;
-		int taxTotal = 0;
-		int sellTotal = 0;
-		int marginTotal = 0;
 		Object[][] rows = new Object[list.size()+1][];
 
 		for (int i = 0; i < rows.length-1; i++) {
 			ProductSales sales = list.get(i);
 			rows[i] = sales.toArray();
-			
-			supTotal = supTotal + sales.getSuprice();
-			taxTotal = taxTotal + sales.getTax();
-			sellTotal = sellTotal + sales.getSellprice();
-			marginTotal = marginTotal + sales.getMarginPrice();
 		}
-		rows[rows.length-1] = new Object[] {"합계", "", "", "", "",
-				String.format("%,d", supTotal),
-				String.format("%,d", taxTotal),
-				String.format("%,d", sellTotal),
-				"",
-				String.format("%,d", marginTotal)};
-		
+		rows[list.size()] = getTotal();
 		return rows;
+	}
+
+	private Object[] getTotal() {
+		List<Map<String,Object>> res = ProductSalesService.getInstance().getTotal();
+		Map<String,Object> maps = res.get(0);
+		
+		String[] total = new String[10];
+		total[0] = "합계";
+		Arrays.fill(total, 1, 4, "");
+		total[5] = String.format("%,.0f", maps.get("suprice"));
+		total[6] = String.format("%,.0f", maps.get("tax"));
+		total[7] = String.format("%,.0f", maps.get("sellprice"));
+		total[8] = "";
+		total[9] = String.format("%,.0f", maps.get("marprice"));
+		return total;
 	}
 }

@@ -13,4 +13,16 @@
 	<select id="selectProductByAll" resultType="Product">
 		<include refid="selectSql" />
 	</select>
+
+	<insert id="insertProduct" parameterType="Product">
+		insert into product values(#{code}, #{name})
+	</insert>
+
+	<select id="dupdateProduct" parameterType="Product" resultType="Product">
+		select * from product where code = #{code}
+	</select>
+
+	<delete id="deleteProduct" parameterType="Product">
+		delete from product where code = #{code}
+	</delete>
 </mapper>
